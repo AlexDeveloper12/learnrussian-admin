@@ -5,8 +5,6 @@ import SearchPhrases from './SearchPhrases';
 
 function PhrasesRightGrid({ data, toggleModal, changeHandler,searchHandler }) {
 
-
-
     const myData = data.filter(v => v.Pronunciation !== null).map((value, index) => {
         return (
 
@@ -16,8 +14,6 @@ function PhrasesRightGrid({ data, toggleModal, changeHandler,searchHandler }) {
                 description={value.BasicPhrasesDescription}
                 toggleModal={toggleModal}
             />
-
-
         )
     })
 

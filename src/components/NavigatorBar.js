@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 const NavigationBar = () => {
     return (
         <div>
-            <AppBar>
+            <AppBar style={{padding:10}} >
                 <Typography variant="h6">
                     Russian Admin
                     </Typography>
