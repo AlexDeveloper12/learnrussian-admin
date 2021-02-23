@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { AppContext } from '../App';
 
 function UpdatePhraseModal({ open, pronunciation, english, russian, updatePhrase, toggleModal }) {
 
-    
+    const {updateItem} = useContext(AppContext);
 
     const useStyles = makeStyles((theme) => ({
         root: {
-            height: 500,
+            height: '60%',
             flexGrow: 1,
-            minWidth: 500,
+            minWidth: '60%',
             transform: 'translateZ(0)',
             // The position fixed scoping doesn't work in IE 11.
             // Disable this demo to preserve the others.
@@ -35,22 +35,18 @@ function UpdatePhraseModal({ open, pronunciation, english, russian, updatePhrase
             backgroundColor: theme.palette.background.paper,
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
-            height: 450
+            height: '60%'
         },
         center: {
             textAlign: 'center'
-        }
-    }));
-
-    const Update = () => {
-        updatePhrase();
-    }
-
-    const styles = {
-        center: {
+        },
+        buttonContainer: {
+            paddingTop: '5%',
+            flex: 1,
+            justifyContent: 'space-between',
             textAlign: 'center'
         }
-    }
+    }));
 
     const classes = useStyles();
 
@@ -76,12 +72,12 @@ function UpdatePhraseModal({ open, pronunciation, english, russian, updatePhrase
                     <div>
                         <TextField style={{ width: '100%' }} placeholder='Sort order' />
                     </div>
-                    <div style={{ textAlign: 'center', paddingTop: '5%' }} >
-                        <Button color="primary" variant="outlined" onClick={Update} style={{ marginRight: 20 }}>Update</Button>
+                    <div >
+                        <Button color="primary" variant="outlined" style={{ marginRight: '20' }} onClick={updateItem} >Update</Button>
                         <Button color="secondary" variant="outlined" onClick={toggleModal}>Close</Button>
                     </div>
-
                 </div>
+
             </Modal>
         </div>
 

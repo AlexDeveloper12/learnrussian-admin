@@ -1,9 +1,12 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import PhrasesData from './PhrasesData';
 import SearchPhrases from './SearchPhrases';
+import {AppContext} from '../App';
 
 
 function PhrasesRightGrid({ data, toggleModal, changeHandler,searchHandler }) {
+
+    const {phrasesCount} = useContext(AppContext);
 
     const myData = data.filter(v => v.Pronunciation !== null).map((value, index) => {
         return (
@@ -19,6 +22,12 @@ function PhrasesRightGrid({ data, toggleModal, changeHandler,searchHandler }) {
 
     return (
         <div>
+
+            <div>
+                <span>Number of phrases: {phrasesCount}</span>
+            
+            </div>
+
             <SearchPhrases
                 changeHandler={searchHandler}
             />

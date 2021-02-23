@@ -10,8 +10,10 @@ import PhrasesGridContainer from './components/PhrasesGridContainer';
 import Loader from './components/Loader';
 import UpdatePhraseModal from './components/UpdatePhraseModal';
 
+require('dotenv').config()
+
 export const AppContext = createContext();
-const name ='alex'
+
 
 function App() {
 
@@ -31,8 +33,14 @@ function App() {
     general: false,
     language: false
   });
+  const [numOfPhrases, setNumOfPhrases] = useState(0);
 
-
+  const [chosenRussianPhrase, setChosenRussianPhrase] = useState({
+    pronunciation: '',
+    russian: '',
+    soundFileUrl: '',
+    sortOrder: 0
+  });
 
   const styles = {
     container: {
@@ -109,12 +117,7 @@ function App() {
         })
 
     } else {
-      //if errors then show the sweet alert
-      // Swal.fire(        
-      //   title: 'Error',
-      //   text: errorString,
-      //   icon: "error"
-      // });
+
       Swal.fire({
         title: 'Unsuccessful!',
         icon: 'error',
@@ -133,11 +136,13 @@ function App() {
       }
     })
       .then(response => {
-        console.log('GetPhrases');
-        console.log(response.data);
+
+
         setPhrases(response.data.message);
         setLoadingData(false);
         setSearchData(response.data.message);
+        setNumOfPhrases(response.data.message.length)
+
       })
       .catch(error => {
         console.log('GetPhrases error: ' + error);
@@ -220,11 +225,39 @@ function App() {
   }
 
   const toggleModal = () => {
+    console.log('toggleModal')
+
     setAddModal(!addModal);
+    // setChosenRussianPhrase(prevState => ({
+    //   ...prevState,
+    //   pronunciation: item.Pronunciation,
+    //   russian: item.BasicPhrases,
+    //   soundFileUrl: item.soundFileURL
+    // }));
   }
 
-  const deleteItem = () =>{
-    console.log('this is delete item')
+  const deleteItem = (itemID) => {
+
+    const headerInfo = {
+      'Content-Type': 'application/json'
+    };
+
+    axios({
+      method: 'DELETE',
+      url: `${Calls.phrases}/${itemID}`,
+      headers: headerInfo
+    })
+      .then(response => {
+        //reload 
+
+      })
+      .catch(error => {
+        console.log('deleteItem error: ' + error);
+      })
+  }
+
+  const updateItem = (item) => {
+    console.log('update item!');
   }
 
   return (
@@ -232,7 +265,7 @@ function App() {
     <div className="App">
       <div style={styles.container}>
         <NavigationBar />
-        <AppContext.Provider value={{deleteItem:deleteItem,value1:name}} >
+        <AppContext.Provider value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem }} >
           <Grid container spacing={10} justify="center">
             {loadingData ? <Loader loading={loadingData} /> : <PhrasesGridContainer
               phrasesData={searchData}
@@ -245,16 +278,17 @@ function App() {
             />}
 
           </Grid>
+          <UpdatePhraseModal
+            open={addModal}
+            toggleModal={toggleModal}
+            russian={chosenRussianPhrase.russian}
+          />
         </AppContext.Provider>
 
       </div>
 
-      <UpdatePhraseModal
-        open={addModal}
-        toggleModal={toggleModal}
 
 
-      />
 
 
     </div>

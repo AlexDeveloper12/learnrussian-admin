@@ -3,6 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 
 const NavigationBar = () => {
+
     return (
         <div>
             <AppBar style={{padding:10}} >

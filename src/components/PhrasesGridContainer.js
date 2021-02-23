@@ -6,8 +6,8 @@ import PhrasesRightGrid from './PhrasesRightGrid';
 function PhrasesGridContainer({ phrasesData,toggleModal,changeHandler,addPhrase,searchHandler,checkBoxHandler,checkBoxValues }) {
 
     return (
-        <Grid container spacing={10} justify="center" key={phrasesData.BasicPhrasesID}>
-            <Grid item xs={5} sm={6}>
+        <Grid container spacing={10} key={phrasesData.BasicPhrasesID} direction="row">
+            <Grid item xs={5} sm={5}>
                 <PhrasesLeftGrid 
                     changeHandler={changeHandler} 
                     addPhrase={addPhrase}
@@ -15,13 +15,12 @@ function PhrasesGridContainer({ phrasesData,toggleModal,changeHandler,addPhrase,
                     checkBoxObject={checkBoxValues}
                 />
             </Grid>
-            <Grid item xs={6} sm={4}>
+            <Grid item xs={9} sm={7}>
                 <PhrasesRightGrid
                     data={phrasesData}
                     toggleModal={toggleModal}
                     changeHandler={changeHandler}
                     searchHandler={searchHandler}
-
                 />
             </Grid>
 
