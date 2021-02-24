@@ -12,8 +12,6 @@ const PhrasesData = ({ pronunciation, description, ID, toggleModal, value, sortO
         toggleModal(item);
     }
 
-    console.log(phraseType);
-
     return (
 
         <Paper style={{ marginBottom: 10, padding: 10, maxHeight: '100%', overflow: 'auto', width: '80%' }} key={ID} >

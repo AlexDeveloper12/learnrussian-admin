@@ -41,6 +41,9 @@ function App() {
   const [updateSortOrder, setUpdateSortOrder] = useState(0);
   const [phraseID, setPhraseID] = useState(0);
 
+  const [selectedFilter, setSelectedFilter] = useState('');
+
+
   const styles = {
     container: {
       marginTop: '5%',
@@ -211,6 +214,17 @@ function App() {
 
   }
 
+  //RADIO BUTTON FILTERS
+
+  const filterByPhraseType = (event) => {
+    console.log(event.target.value);
+    setSelectedFilter(event.target.value);
+    console.log('selectedfilter');
+    console.log(selectedFilter)
+  }
+
+  //TOGGLE CHECKBOXES
+
   const toggleCheckboxes = (event) => {
     let greeting = false;
     let general = false;
@@ -240,6 +254,8 @@ function App() {
     }));
 
   }
+
+  //TOGGLE MODAL
 
   const toggleModal = (item) => {
     setAddModal(!addModal);
@@ -318,7 +334,7 @@ function App() {
     <div className="App">
       <div style={styles.container}>
         <NavigationBar />
-        <AppContext.Provider value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem }} >
+        <AppContext.Provider value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType,selectedFilter:selectedFilter }} >
           <Grid container spacing={10} justify="center">
             {loadingData ? <Loader loading={loadingData} /> : <PhrasesGridContainer
               phrasesData={searchData}

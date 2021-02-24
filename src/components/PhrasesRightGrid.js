@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import PhrasesData from './PhrasesData';
 import SearchPhrases from './SearchPhrases';
-import { AppContext } from '../App';
-
 
 function PhrasesRightGrid({ data, toggleModal, changeHandler, searchHandler }) {
 

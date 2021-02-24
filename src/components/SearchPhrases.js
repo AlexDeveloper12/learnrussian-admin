@@ -6,7 +6,7 @@ import FilterRadioGroup from '../components/FilterRadioGroup';
 
 function SearchPhrases({ searchValue, changeHandler }) {
 
-    const { phrasesCount } = useContext(AppContext);
+    const { phrasesCount, selectedFilter } = useContext(AppContext);
 
     const phraseChangeHandler = (e) => {
         changeHandler(e);
@@ -14,7 +14,9 @@ function SearchPhrases({ searchValue, changeHandler }) {
 
     return (
         <div style={{ marginBottom: 10, float: 'left' }}>
-            <FilterRadioGroup />
+            <FilterRadioGroup
+                selectedValue={selectedFilter}
+            />
             {/* <div style={{ textAlign: 'left', marginBottom: 20 }}>
                 <span>Number of phrases: {phrasesCount}</span><br />
             </div> */}
