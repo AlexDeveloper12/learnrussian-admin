@@ -108,6 +108,15 @@ function App() {
             icon: 'success'
           });
           GetPhrases();
+          setPronunciation('');
+          setSortOrder();
+          setSoundFileURL('');
+          setRussian('');
+          setCheckedObject({
+            greeting: false,
+            general: false,
+            language: false
+          });
 
         })
         .catch(error => {
@@ -253,8 +262,7 @@ function App() {
     let greeting = false;
     let general = false;
     let language = false;
-    console.log(event.target.checked);
-    console.log('toggleCheckboxes');
+
     switch (event.target.name) {
       case 'greetingphrase':
         greeting = true;
@@ -344,7 +352,6 @@ function App() {
 
           GetPhrases(); //retrieve phrases after we have updated them to see changes
         }
-
 
       })
       .catch(error => {
