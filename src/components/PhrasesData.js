@@ -35,7 +35,7 @@ const PhrasesData = ({ pronunciation, description, ID, toggleModal, value, sortO
                 <span style={{textAlign:'center',fontSize:10}}>{sortOrder}</span>
             </div>
             <div>
-            {phraseType.isGreeting===1?<span>Greeting</span>:''} {phraseType.isGeneral===1?<span>General</span>:''} {phraseType.isLanguage===1?<span>Language</span>:''}
+            Phrase type:{phraseType.isGreeting===1?<span>Greeting</span>:''} {phraseType.isGeneral===1?<span>General</span>:''} {phraseType.isLanguage===1?<span>Language</span>:''}
             </div>
         </Paper>
 
