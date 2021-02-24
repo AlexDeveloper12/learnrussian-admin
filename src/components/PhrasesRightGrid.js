@@ -6,9 +6,12 @@ import { AppContext } from '../App';
 
 function PhrasesRightGrid({ data, toggleModal, changeHandler, searchHandler }) {
 
-    const { phrasesCount } = useContext(AppContext);
-
     const myData = data.filter(v => v.Pronunciation !== null).map((value, index) => {
+        const phraseType ={
+            isGreeting:value.isGreetingPhrase.data[0],
+            isGeneral:value.isGeneralPhrase.data[0],
+            isLanguage:value.isLanguagePhrase.data[0]
+        }
         return (
             <div key={index}>
                 <PhrasesData
@@ -17,19 +20,18 @@ function PhrasesRightGrid({ data, toggleModal, changeHandler, searchHandler }) {
                     description={value.BasicPhrasesDescription}
                     toggleModal={toggleModal}
                     value={value}
+                    sortOrder={value.SortOrder}
+                    phraseType={phraseType}
                 />
             </div>
 
         )
-    })
+    });
 
     return (
         <div>
 
-            <div>
-                <span>Number of phrases: {phrasesCount}</span>
 
-            </div>
 
             <SearchPhrases
                 changeHandler={searchHandler}

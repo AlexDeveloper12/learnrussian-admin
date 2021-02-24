@@ -142,7 +142,8 @@ function App() {
         setPhrases(response.data.message);
         setLoadingData(false);
         setSearchData(response.data.message);
-        setNumOfPhrases(response.data.message.length)
+        setNumOfPhrases(response.data.message.length);
+        console.log(response.data.message[0].isGeneralPhrase.data[0]);
 
       })
       .catch(error => {
@@ -284,9 +285,6 @@ function App() {
       'Content-Type': 'application/json'
     };
 
-    console.log(item)
-
-
     axios({
       method: 'PUT',
       url: `${Calls.basicphrase}/${phraseID}`,
@@ -296,13 +294,12 @@ function App() {
       .then(response => {
 
         if (response.status === 200) {
-          
+
           setAddModal(!addModal);
           Swal.fire({
             title: 'Update!',
             text: 'Phrase successfully updated!',
-            icon: 'success',
-            showConfirmButton: true
+            icon: 'success'
           });
 
           GetPhrases(); //retrieve phrases after we have updated them to see changes
