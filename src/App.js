@@ -217,10 +217,34 @@ function App() {
   //RADIO BUTTON FILTERS
 
   const filterByPhraseType = (event) => {
-    console.log(event.target.value);
+
+    let value = event.target.value;
+
+    let filterResult = phrases.filter((data) => {
+      let filterValueArray = []
+      switch (value) {
+        case 'greeting':
+          filterValueArray = data.isGreetingPhrase.data[0] === 1
+          break;
+        case 'general':
+          filterValueArray = data.isGeneralPhrase.data[0] === 1
+          break;
+        case 'language':
+          filterValueArray = data.isLanguagePhrase.data[0] === 1
+          break;
+      }
+
+      return filterValueArray
+    });
+
+    console.log(filterResult);
+
     setSelectedFilter(event.target.value);
-    console.log('selectedfilter');
-    console.log(selectedFilter)
+    setSearchData(filterResult);
+
+
+
+
   }
 
   //TOGGLE CHECKBOXES
@@ -334,7 +358,7 @@ function App() {
     <div className="App">
       <div style={styles.container}>
         <NavigationBar />
-        <AppContext.Provider value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType,selectedFilter:selectedFilter }} >
+        <AppContext.Provider value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType, selectedFilter: selectedFilter }} >
           <Grid container spacing={10} justify="center">
             {loadingData ? <Loader loading={loadingData} /> : <PhrasesGridContainer
               phrasesData={searchData}

@@ -6,8 +6,6 @@ import { AppContext } from '../App';
 const FilterRadioButton = ({ label, compValue, defaultValue }) => {
 
     const { filterByPhraseType,selectedFilter } = useContext(AppContext);
-    
-    console.log(filterByPhraseType)
 
     return (
         <FormControlLabel
