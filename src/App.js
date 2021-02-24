@@ -35,12 +35,11 @@ function App() {
   });
   const [numOfPhrases, setNumOfPhrases] = useState(0);
 
-  const [chosenRussianPhrase, setChosenRussianPhrase] = useState({
-    pronunciation: '',
-    russian: '',
-    soundFileUrl: '',
-    sortOrder: 0
-  });
+  const [updatePronun, setUpdatePronun] = useState('');
+  const [updateRuss, setUpdateRuss] = useState('');
+  const [updateSoundURL, setUpdateSoundURL] = useState('');
+  const [updateSortOrder, setUpdateSortOrder] = useState(0);
+  const [phraseID, setPhraseID] = useState(0);
 
   const styles = {
     container: {
@@ -53,11 +52,11 @@ function App() {
   const AddPhrase = () => {
     let errorString = '';
 
-    if (pronunciation.length === 0) {
+    if (pronunciation.length === 0) { //if pronunciation empty
       errorString += 'Please enter a pronunciation value<br/>';
     }
 
-    if (russian.length === 0) {
+    if (russian.length === 0) { //if russian/english phrase empty
       errorString += 'Please enter a Russian value<br/>';
     }
 
@@ -65,9 +64,11 @@ function App() {
       errorString += 'Please enter a sort order value<br/>';
     }
 
-    if (/[a-zA-Z]/.test(sortOrder)) {
+    if (/[a-zA-Z]/.test(sortOrder)) { //if sort order contains a string value
       errorString += 'Please ensure the sort order value is a number only<br/>';
     }
+
+    //if all of the checkboxes are unchecked
 
     if (checkedObject['general'] === false && checkedObject['greeting'] === false && checkedObject['language'] === false) {
       errorString += 'Please ensure you check one of the 3 checkboxes<br/>';
@@ -155,18 +156,33 @@ function App() {
   }, [])
 
   const customHandlerChange = (event) => {
+    let value = event.target.value;
+    console.log(event.target.value);
+    console.log(event.target.name);
     switch (event.target.name) {
       case 'pronunciation':
-        setPronunciation(event.target.value);
+        setPronunciation(value);
         break;
       case 'russian':
-        setRussian(event.target.value);
+        setRussian(value);
         break;
       case 'sortorder':
-        setSortOrder(event.target.value);
+        setSortOrder(value);
         break;
       case 'soundfile':
-        setSoundFileURL(event.target.value);
+        setSoundFileURL(value);
+        break;
+      case 'updatepronunciation':
+        setUpdatePronun(value)
+        break;
+      case 'updaterussian':
+        setUpdateRuss(value);
+        break;
+      case 'updatesoundfile':
+        setUpdateSoundURL(value);
+        break;
+      case 'updatesortorder':
+        setUpdateSortOrder(value);
         break;
       default:
         break;
@@ -224,16 +240,14 @@ function App() {
 
   }
 
-  const toggleModal = () => {
-    console.log('toggleModal')
-
+  const toggleModal = (item) => {
     setAddModal(!addModal);
-    // setChosenRussianPhrase(prevState => ({
-    //   ...prevState,
-    //   pronunciation: item.Pronunciation,
-    //   russian: item.BasicPhrases,
-    //   soundFileUrl: item.soundFileURL
-    // }));
+    setUpdatePronun(item.Pronunciation);
+    setUpdateRuss(item.BasicPhrasesDescription);
+    setUpdateSoundURL(item.SoundFileName);
+    setUpdateSortOrder(item.SortOrder);
+    setPhraseID(item.BasicPhrasesID);
+
   }
 
   const deleteItem = (itemID) => {
@@ -257,7 +271,49 @@ function App() {
   }
 
   const updateItem = (item) => {
-    console.log('update item!');
+    const myData = JSON.stringify({
+      Pronunciation: updatePronun,
+      BasicPhrasesDescription: updateRuss,
+      soundFileURL: updateSoundURL,
+      sortOrder: updateSortOrder
+    });
+
+    //send as json data
+
+    const headerInfo = {
+      'Content-Type': 'application/json'
+    };
+
+    console.log(item)
+
+
+    axios({
+      method: 'PUT',
+      url: `${Calls.basicphrase}/${phraseID}`,
+      data: myData,
+      headers: headerInfo
+    })
+      .then(response => {
+
+        if (response.status === 200) {
+          
+          setAddModal(!addModal);
+          Swal.fire({
+            title: 'Update!',
+            text: 'Phrase successfully updated!',
+            icon: 'success',
+            showConfirmButton: true
+          });
+
+          GetPhrases(); //retrieve phrases after we have updated them to see changes
+        }
+
+
+      })
+      .catch(error => {
+        console.log('updateItem: ' + error)
+      })
+
   }
 
   return (
@@ -278,11 +334,16 @@ function App() {
             />}
 
           </Grid>
-          <UpdatePhraseModal
+          {addModal ? <UpdatePhraseModal
             open={addModal}
             toggleModal={toggleModal}
-            russian={chosenRussianPhrase.russian}
-          />
+            russian={updateRuss}
+            pronunciation={updatePronun}
+            soundFileURL={updateSoundURL}
+            changeHandler={customHandlerChange}
+            sortOrder={updateSortOrder}
+          /> : null}
+
         </AppContext.Provider>
 
       </div>

@@ -4,10 +4,17 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppContext } from '../App';
+import '../styles/UpdatePhraseModal.css';
 
-function UpdatePhraseModal({ open, pronunciation, english, russian, updatePhrase, toggleModal }) {
+function UpdatePhraseModal({ open, pronunciation, russian, soundFileURL,sortOrder, toggleModal, changeHandler }) {
 
-    const {updateItem} = useContext(AppContext);
+    const { updateItem } = useContext(AppContext);
+
+    const updateChangeHandler = (e) => {
+        console.log('updateChangeHandler');
+        console.log(e);
+        changeHandler(e);
+    }
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -60,21 +67,21 @@ function UpdatePhraseModal({ open, pronunciation, english, russian, updatePhrase
                 onBackdropClick={toggleModal}
             >
                 <div className={classes.paper}>
-                    <div style={{ textAlign: 'center' }}>
-                        <TextField style={{ width: '100%' }} placeholder='Pronunciation...' autoFocus />
+                    <div className="inputContainer">
+                        <TextField style={{ width: '100%' }} placeholder='Pronunciation...' name='updatepronunciation' autoFocus value={pronunciation} onChange={updateChangeHandler} />
                     </div>
-                    <div style={{ textAlign: 'center' }} >
-                        <TextField style={{ width: '100%' }} placeholder='Russian...' />
+                    <div style={{ textAlign: 'center', marginBottom: 20 }} >
+                        <TextField style={{ width: '100%' }} placeholder='Russian...' name='updaterussian' value={russian} onChange={updateChangeHandler} />
+                    </div>
+                    <div style={{ marginBottom: 20 }}>
+                        <TextField style={{ width: '100%' }} placeholder='Sound file URL...' name='updatesoundfile' multiline rows="2" value={soundFileURL} onChange={updateChangeHandler} />
                     </div>
                     <div>
-                        <TextField style={{ width: '100%' }} placeholder='Sound file URL...' />
+                        <TextField style={{ width: '100%' }} placeholder='Sort order' name='updatesortorder' value={sortOrder} onChange={updateChangeHandler} />
                     </div>
-                    <div>
-                        <TextField style={{ width: '100%' }} placeholder='Sort order' />
-                    </div>
-                    <div >
-                        <Button color="primary" variant="outlined" style={{ marginRight: '20' }} onClick={updateItem} >Update</Button>
-                        <Button color="secondary" variant="outlined" onClick={toggleModal}>Close</Button>
+                    <div className="buttonContainer">
+                        <Button color="primary" variant="outlined" className="update" onClick={updateItem} >Update</Button>
+                        <Button color="secondary" variant="outlined" onClick={toggleModal} className="close" >Close</Button>
                     </div>
                 </div>
 

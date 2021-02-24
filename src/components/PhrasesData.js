@@ -4,12 +4,12 @@ import { FaPen, FaTimesCircle } from 'react-icons/fa';
 import { Paper, Grid } from '@material-ui/core';
 import { AppContext } from '../App';
 
-const PhrasesData = ({ pronunciation, description, ID, toggleModal }) => {
+const PhrasesData = ({ pronunciation, description, ID, toggleModal,value }) => {
 
     const { deleteItem } = useContext(AppContext);
 
-    const togglePhraseModal = () => {
-        toggleModal();
+    const togglePhraseModal = (item) => {
+        toggleModal(item);
     }
 
     return (
@@ -20,7 +20,7 @@ const PhrasesData = ({ pronunciation, description, ID, toggleModal }) => {
             </Typography>
             <div>
                 <FaPen
-                    onClick={togglePhraseModal}
+                    onClick={()=>togglePhraseModal(value)}
                     style={{ marginLeft: 10 }}
                 />
                 <FaTimesCircle

@@ -24,7 +24,7 @@ function PhrasesLeftGrid({ pronunciation, russian,soundFileURL,sortOrder, change
         marginBottom: 30,
         container: {
             height: '30%',
-            width: '90%'
+            width: '100%'
         }
     }
 
@@ -32,8 +32,6 @@ function PhrasesLeftGrid({ pronunciation, russian,soundFileURL,sortOrder, change
 
         <Paper style={styles.container}>
             
-
-
             <TextField
                 name="pronunciation"
                 style={styles}
