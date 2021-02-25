@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import 'fontsource-roboto';
 import { AppContext } from '../App';
 import FilterRadioGroup from '../components/FilterRadioGroup';
+import FilterDropdown from './FilterDropdown';
 
 function SearchPhrases({ searchValue, changeHandler }) {
 
@@ -17,6 +18,8 @@ function SearchPhrases({ searchValue, changeHandler }) {
             <FilterRadioGroup
                 selectedValue={selectedFilter}
             />
+
+            {/* <FilterDropdown/> */}
             {/* <div style={{ textAlign: 'left', marginBottom: 20 }}>
                 <span>Number of phrases: {phrasesCount}</span><br />
             </div> */}

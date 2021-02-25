@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PhrasesData from './PhrasesData';
 import SearchPhrases from './SearchPhrases';
+import Grid from '@material-ui/core/Grid';
 
 function PhrasesRightGrid({ data, toggleModal, changeHandler, searchHandler }) {
 
@@ -12,6 +13,7 @@ function PhrasesRightGrid({ data, toggleModal, changeHandler, searchHandler }) {
         }
         return (
             <div key={index}>
+                
                 <PhrasesData
                     ID={value.BasicPhrasesID}
                     pronunciation={value.Pronunciation}

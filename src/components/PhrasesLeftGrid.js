@@ -25,7 +25,8 @@ function PhrasesLeftGrid({ pronunciation, russian,soundFileURL,sortOrder, change
         container: {
             height: '30%',
             width: '100%'
-        }
+        },
+        color:'white'
     }
 
     return (
@@ -62,6 +63,7 @@ function PhrasesLeftGrid({ pronunciation, russian,soundFileURL,sortOrder, change
                 placeholder="Soundfile URL..."
                 name="soundfile"
                 value={soundFileURL}
+
             />
 
 
@@ -101,7 +103,7 @@ function PhrasesLeftGrid({ pronunciation, russian,soundFileURL,sortOrder, change
 
             />
 
-            <div>
+            <div style={{textAlign:'center'}}>
                 <Button variant="outlined" color="primary" onClick={add}> Add Phrase</Button>
             </div>
 

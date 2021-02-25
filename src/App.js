@@ -10,9 +10,27 @@ import PhrasesGridContainer from './components/PhrasesGridContainer';
 import Loader from './components/Loader';
 import UpdatePhraseModal from './components/UpdatePhraseModal';
 
+import { ThemeProvider } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { Brightness3Outlined, Brightness7Outlined } from '@material-ui/icons';
+import IconButton from "@material-ui/core/IconButton";
+import ChangeThemeButton from './components/ChangeThemeButton';
+
 require('dotenv').config()
 
 export const AppContext = createContext();
+
+export const light = {
+  palette: {
+    type: 'light'
+  },
+}
+
+export const dark = {
+  palette: {
+    type: 'dark'
+  }
+};
 
 
 function App() {
@@ -42,6 +60,12 @@ function App() {
   const [phraseID, setPhraseID] = useState(0);
 
   const [selectedFilter, setSelectedFilter] = useState('');
+
+  const [theme, setTheme] = useState(true);
+
+  const icon = !theme ? <Brightness7Outlined /> : <Brightness3Outlined />
+
+  const appliedTheme = createMuiTheme(theme ? light : dark);
 
 
   const styles = {
@@ -219,7 +243,11 @@ function App() {
 
     });
 
-    setSearchData(result)
+    setSearchData(result);
+    setGeneral(false);
+    setGreeting(false);
+    setLanguage(false);
+    //when a user begins to search for a phrase we need to uncheck the radio buttons above
 
   }
 
@@ -250,9 +278,6 @@ function App() {
 
     setSelectedFilter(event.target.value);
     setSearchData(filterResult);
-
-
-
 
   }
 
@@ -305,13 +330,32 @@ function App() {
       'Content-Type': 'application/json'
     };
 
+    console.log('deleteItem');
+
+    console.log(itemID);
+
     axios({
       method: 'DELETE',
-      url: `${Calls.phrases}/${itemID}`,
+      url: `${Calls.basicphrase}/${itemID}`,
       headers: headerInfo
     })
       .then(response => {
         //reload 
+        if (response.status === 200) {
+          Swal.fire({
+            title: 'Deleted',
+            text: response.data.message,
+            icon: "success"
+          });
+          GetPhrases(); //show sweet alert and then reload phrases
+          //can maybe do a fade in fade out animation?
+        } else {
+          Swal.fire({
+            title: 'Error',
+            text: 'Error deleting the phrase!',
+            icon: "error"
+          })
+        }
 
       })
       .catch(error => {
@@ -360,43 +404,56 @@ function App() {
 
   }
 
-  return (
+  const toggleTheme = () => {
+    setTheme(!theme)
+  }
 
-    <div className="App">
-      <div style={styles.container}>
-        <NavigationBar />
-        <AppContext.Provider value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType, selectedFilter: selectedFilter }} >
-          <Grid container spacing={10} justify="center">
-            {loadingData ? <Loader loading={loadingData} /> : <PhrasesGridContainer
-              phrasesData={searchData}
-              toggleModal={toggleModal}
-              changeHandler={customHandlerChange}
-              addPhrase={AddPhrase}
-              searchHandler={searchDataHandler}
-              checkBoxHandler={toggleCheckboxes}
-              checkBoxValues={checkedObject}
-            />}
+  return (
+    <ThemeProvider theme={appliedTheme}>
+      <div className="App">
+        <div style={styles.container}>
+          <NavigationBar />
+
+          <Grid container spacing={4} style={{marginBottom:20}} >
+            <Grid item>
+
+              <ChangeThemeButton
+                icon={icon}
+                changeTheme={toggleTheme}
+              />
+            </Grid>
 
           </Grid>
-          {addModal ? <UpdatePhraseModal
-            open={addModal}
-            toggleModal={toggleModal}
-            russian={updateRuss}
-            pronunciation={updatePronun}
-            soundFileURL={updateSoundURL}
-            changeHandler={customHandlerChange}
-            sortOrder={updateSortOrder}
-          /> : null}
 
-        </AppContext.Provider>
 
+          <AppContext.Provider value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType, selectedFilter: selectedFilter }} >
+            <Grid container spacing={10} justify="center">
+              {loadingData ? <Loader loading={loadingData} /> : <PhrasesGridContainer
+                phrasesData={searchData}
+                toggleModal={toggleModal}
+                changeHandler={customHandlerChange}
+                addPhrase={AddPhrase}
+                searchHandler={searchDataHandler}
+                checkBoxHandler={toggleCheckboxes}
+                checkBoxValues={checkedObject}
+              />}
+
+            </Grid>
+            {addModal ? <UpdatePhraseModal
+              open={addModal}
+              toggleModal={toggleModal}
+              russian={updateRuss}
+              pronunciation={updatePronun}
+              soundFileURL={updateSoundURL}
+              changeHandler={customHandlerChange}
+              sortOrder={updateSortOrder}
+            /> : null}
+
+          </AppContext.Provider>
+
+        </div>
       </div>
-
-
-
-
-
-    </div>
+    </ThemeProvider>
   );
 }
 

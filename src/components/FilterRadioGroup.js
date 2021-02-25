@@ -10,7 +10,7 @@ const FilterRadioGroup = () => {
 
 
     return (
-        <div>Filter:
+        <div>
             <RadioGroup row >
 
                 <FilterRadioButton
@@ -32,6 +32,8 @@ const FilterRadioGroup = () => {
                     defaultValue='language'
 
                 />
+
+
             </RadioGroup>
 
         </div>

@@ -12,27 +12,31 @@ const PhrasesData = ({ pronunciation, description, ID, toggleModal, value, sortO
         toggleModal(item);
     }
 
+    const deletePhrase = (ID)=>{
+        deleteItem(ID);
+    }
+
     return (
 
         <Paper style={{ marginBottom: 10, padding: 10, maxHeight: '100%', overflow: 'auto', width: '80%' }} key={ID} >
-            <Typography variant="subtitle1">
+            <Typography variant="subtitle1" style={{textAlign:'center'}} >
                 {pronunciation} - {description}
             </Typography>
-            <div>
+            <div style={{textAlign:'center'}}>
                 <FaPen
                     onClick={() => togglePhraseModal(value)}
                     style={{ marginLeft: 10 }}
                 />
                 <FaTimesCircle
                     style={{ marginLeft: 10 }}
-                    onClick={deleteItem}
+                    onClick={()=>deletePhrase(ID)}
 
                 />
             </div>
-            <div>
-                <span style={{textAlign:'center',fontSize:10}}>{sortOrder}</span>
+            <div style={{textAlign:'center'}}>
+                <span style={{fontSize:10}}>{sortOrder}</span>
             </div>
-            <div>
+            <div style={{textAlign:'center'}}>
             Phrase type:{phraseType.isGreeting===1?<span>Greeting</span>:''} {phraseType.isGeneral===1?<span>General</span>:''} {phraseType.isLanguage===1?<span>Language</span>:''}
             </div>
         </Paper>
