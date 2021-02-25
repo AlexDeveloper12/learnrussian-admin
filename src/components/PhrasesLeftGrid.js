@@ -104,7 +104,7 @@ function PhrasesLeftGrid({ pronunciation, russian,soundFileURL,sortOrder, change
             />
 
             <div style={{textAlign:'center'}}>
-                <Button variant="outlined" color="primary" onClick={add}> Add Phrase</Button>
+                <Button variant="outlined" color="secondary"  onClick={add}> Add Phrase</Button>
             </div>
 
 

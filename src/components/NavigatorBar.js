@@ -7,7 +7,7 @@ const NavigationBar = () => {
     return (
         <div>
             <AppBar style={{padding:10}} >
-                <Typography variant="h6">
+                <Typography variant="h6" style={{textAlign:'center'}}>
                     Russian Admin
                     </Typography>
             </AppBar>

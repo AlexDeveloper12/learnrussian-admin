@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import 'fontsource-roboto';
-import { AppContext } from '../App';
 import FilterRadioGroup from '../components/FilterRadioGroup';
 import FilterDropdown from './FilterDropdown';
+import { AppContext } from '../App';
+import Paper from '@material-ui/core/Paper';
 
 function SearchPhrases({ searchValue, changeHandler }) {
 
@@ -15,9 +16,12 @@ function SearchPhrases({ searchValue, changeHandler }) {
 
     return (
         <div style={{ marginBottom: 10, float: 'left' }}>
-            <FilterRadioGroup
-                selectedValue={selectedFilter}
-            />
+            <Paper>
+                <FilterRadioGroup
+                    selectedValue={selectedFilter}
+                />
+            </Paper>
+
 
             {/* <FilterDropdown/> */}
             {/* <div style={{ textAlign: 'left', marginBottom: 20 }}>

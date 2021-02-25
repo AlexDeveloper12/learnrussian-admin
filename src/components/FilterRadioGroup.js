@@ -17,6 +17,7 @@ const FilterRadioGroup = () => {
                     label='General'
                     compValue='general'
                     defaultValue='general'
+                    
 
                 />
                 <FilterRadioButton
