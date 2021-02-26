@@ -12,7 +12,8 @@ import UpdatePhraseModal from './components/UpdatePhraseModal';
 
 import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { Brightness3Outlined, Brightness7Outlined, MicNoneOutlined } from '@material-ui/icons';
+import { Brightness3Outlined, Brightness7Outlined, MicNoneOutlined, AddShoppingCartRounded, Add } from '@material-ui/icons';
+import AddPhraseModal from './components/AddPhraseModal';
 
 
 require('dotenv').config()
@@ -42,7 +43,7 @@ function App() {
   const [greeting, setGreeting] = useState(false);
   const [general, setGeneral] = useState(false);
   const [language, setLanguage] = useState(false);
-  const [addModal, setAddModal] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
   const [searchData, setSearchData] = useState(phrases);
   const [checkedObject, setCheckedObject] = useState({
@@ -62,7 +63,12 @@ function App() {
 
   const [theme, setTheme] = useState(true);
 
+  const [addModal, setAddModal] = useState(false);
+
+
   const icon = !theme ? <Brightness7Outlined /> : <Brightness3Outlined />
+
+  const addIcon = <Add />;
 
   const appliedTheme = createMuiTheme(theme ? light : dark);
 
@@ -307,7 +313,7 @@ function App() {
   //TOGGLE MODAL
 
   const toggleModal = (item) => {
-    setAddModal(!addModal);
+    setUpdateModal(!updateModal);
     setUpdatePronun(item.Pronunciation);
     setUpdateRuss(item.BasicPhrasesDescription);
     setUpdateSoundURL(item.SoundFileName);
@@ -379,7 +385,7 @@ function App() {
 
         if (response.status === 200) {
 
-          setAddModal(!addModal);
+          setUpdateModal(!updateModal);
           Swal.fire({
             title: 'Update!',
             text: 'Phrase successfully updated!',
@@ -400,6 +406,10 @@ function App() {
     setTheme(!theme)
   }
 
+  const toggleAddModal = () => {
+    setAddModal(!addModal);
+  }
+
   return (
     <ThemeProvider theme={appliedTheme}>
       <div className="App">
@@ -407,6 +417,8 @@ function App() {
           <NavigationBar
             icon={icon}
             toggleTheme={toggleTheme}
+            toggleModal={toggleAddModal}
+            addIcon={addIcon}
           />
 
           <Grid container spacing={4} style={{ marginBottom: 20 }} direction="row" >
@@ -432,15 +444,28 @@ function App() {
               />}
 
             </Grid>
-            {addModal ? <UpdatePhraseModal
-              open={addModal}
+            {updateModal && <UpdatePhraseModal
+              open={updateModal}
               toggleModal={toggleModal}
               russian={updateRuss}
               pronunciation={updatePronun}
               soundFileURL={updateSoundURL}
               changeHandler={customHandlerChange}
               sortOrder={updateSortOrder}
-            /> : null}
+            />}
+
+            {addModal && <AddPhraseModal
+                open={addModal}
+                pronunciation={pronunciation}
+                russian={russian}
+                soundFileURL={soundFileURL}
+                sortOrder={sortOrder}
+                add={AddPhrase}
+                cbHandler={toggleCheckboxes}
+                checkBoxObject={checkedObject}
+                phraseChangeHandler={customHandlerChange}
+                toggleAddModal={toggleAddModal}
+            />}
 
           </AppContext.Provider>
 
