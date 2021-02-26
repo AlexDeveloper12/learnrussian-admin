@@ -79,8 +79,8 @@ function UpdatePhraseModal({ open, pronunciation, russian, soundFileURL,sortOrde
                     <div>
                         <TextField style={{ width: '100%' }} placeholder='Sort order' name='updatesortorder' value={sortOrder} onChange={updateChangeHandler} />
                     </div>
-                    <div className="buttonContainer">
-                        <Button color="primary" variant="outlined" className="update" onClick={updateItem} >Update</Button>
+                    <div style={styles.btnContainer}>
+                        <Button color="primary" variant="outlined" style={styles.btnUpdate} onClick={updateItem} >Update</Button>
                         <Button color="secondary" variant="outlined" onClick={toggleModal} className="close" >Close</Button>
                     </div>
                 </div>
@@ -89,8 +89,18 @@ function UpdatePhraseModal({ open, pronunciation, russian, soundFileURL,sortOrde
         </div>
 
     )
+}
 
-
+const styles = {
+    btnContainer:{
+        paddingTop: '5%',
+        flex: 1,
+        justifyContent: 'space-between',
+        textAlign: 'center'
+    },
+    btnUpdate:{
+        marginRight:10
+    }
 }
 
 export default UpdatePhraseModal;

@@ -15,7 +15,7 @@ function SearchPhrases({ searchValue, changeHandler }) {
     }
 
     return (
-        <div style={{ marginBottom: 10, float: 'left' }}>
+        <div style={styles.container}>
             <Paper>
                 <FilterRadioGroup
                     selectedValue={selectedFilter}
@@ -41,6 +41,12 @@ function SearchPhrases({ searchValue, changeHandler }) {
 
     )
 
+}
+
+const styles = {
+    container:{
+        marginBottom: 10, float: 'left'
+    }
 }
 
 export default SearchPhrases;

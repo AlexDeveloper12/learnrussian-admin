@@ -10,14 +10,13 @@ const FilterRadioGroup = () => {
 
 
     return (
-        <div>
+        <div style={styles.container}>
             <RadioGroup row >
 
                 <FilterRadioButton
                     label='General'
                     compValue='general'
                     defaultValue='general'
-                    
 
                 />
                 <FilterRadioButton
@@ -40,6 +39,13 @@ const FilterRadioGroup = () => {
         </div>
     )
 
+
+}
+
+const styles = {
+    container: {
+        marginBottom: 20
+    }
 
 }
 

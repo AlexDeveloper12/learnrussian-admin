@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 const ChangeThemeButton = ({ icon, changeTheme }) => {
 
     return (
-        <div>
+        
             <IconButton
                 edge="end"
                 color="inherit"
@@ -13,7 +13,7 @@ const ChangeThemeButton = ({ icon, changeTheme }) => {
             >
                 {icon}
             </IconButton>
-        </div>
+        
 
     )
 

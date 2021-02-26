@@ -26,7 +26,8 @@ function PhrasesLeftGrid({ pronunciation, russian,soundFileURL,sortOrder, change
             height: '30%',
             width: '100%'
         },
-        color:'white'
+        color:'white',
+        
     }
 
     return (

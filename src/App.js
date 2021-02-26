@@ -12,9 +12,8 @@ import UpdatePhraseModal from './components/UpdatePhraseModal';
 
 import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { Brightness3Outlined, Brightness7Outlined } from '@material-ui/icons';
-import IconButton from "@material-ui/core/IconButton";
-import ChangeThemeButton from './components/ChangeThemeButton';
+import { Brightness3Outlined, Brightness7Outlined, MicNoneOutlined } from '@material-ui/icons';
+
 
 require('dotenv').config()
 
@@ -66,15 +65,6 @@ function App() {
   const icon = !theme ? <Brightness7Outlined /> : <Brightness3Outlined />
 
   const appliedTheme = createMuiTheme(theme ? light : dark);
-
-
-  const styles = {
-    container: {
-      marginTop: '5%',
-      padding: '3%',
-      marginLeft: '2%'
-    }
-  }
 
   const AddPhrase = () => {
     let errorString = '';
@@ -131,7 +121,6 @@ function App() {
             text: responseData.data.message,
             icon: 'success'
           });
-          GetPhrases();
           setPronunciation('');
           setSortOrder();
           setSoundFileURL('');
@@ -141,6 +130,9 @@ function App() {
             general: false,
             language: false
           });
+
+          GetPhrases();
+
 
         })
         .catch(error => {
@@ -412,21 +404,22 @@ function App() {
     <ThemeProvider theme={appliedTheme}>
       <div className="App">
         <div style={styles.container}>
-          <NavigationBar />
+          <NavigationBar
+            icon={icon}
+            toggleTheme={toggleTheme}
+          />
 
-          <Grid container spacing={4} style={{marginBottom:20}} >
+          <Grid container spacing={4} style={{ marginBottom: 20 }} direction="row" >
             <Grid item>
 
-              <ChangeThemeButton
-                icon={icon}
-                changeTheme={toggleTheme}
-              />
+
             </Grid>
 
           </Grid>
 
 
-          <AppContext.Provider value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType, selectedFilter: selectedFilter }} >
+          <AppContext.Provider
+            value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType, selectedFilter: selectedFilter }} >
             <Grid container spacing={10} justify="center">
               {loadingData ? <Loader loading={loadingData} /> : <PhrasesGridContainer
                 phrasesData={searchData}
@@ -455,6 +448,15 @@ function App() {
       </div>
     </ThemeProvider>
   );
+}
+
+
+const styles = {
+  container: {
+    marginTop: '5%',
+    padding: '3%',
+    marginLeft: '2%'
+  }
 }
 
 export default App;
