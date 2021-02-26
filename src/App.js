@@ -12,8 +12,9 @@ import UpdatePhraseModal from './components/UpdatePhraseModal';
 
 import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { Brightness3Outlined, Brightness7Outlined, MicNoneOutlined, AddShoppingCartRounded, Add } from '@material-ui/icons';
+import { Brightness3Outlined, Brightness7Outlined, Add } from '@material-ui/icons';
 import AddPhraseModal from './components/AddPhraseModal';
+import SearchPhrases from './components/SearchPhrases';
 
 
 require('dotenv').config()
@@ -136,6 +137,8 @@ function App() {
             general: false,
             language: false
           });
+
+          setAddModal(false);
 
           GetPhrases();
 
@@ -421,17 +424,20 @@ function App() {
             addIcon={addIcon}
           />
 
-          <Grid container spacing={4} style={{ marginBottom: 20 }} direction="row" >
-            <Grid item>
-
-
-            </Grid>
-
-          </Grid>
-
 
           <AppContext.Provider
             value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType, selectedFilter: selectedFilter }} >
+            {/* style={{justifyContent:'center',height:'100%',display:'flex',width:'100%',marginBottom:'5%'}} */}
+
+            <Grid container justify="center" style={{marginBottom:45}}>
+              <Grid item>
+                <SearchPhrases
+                  changeHandler={searchDataHandler} />
+              </Grid>
+            </Grid>
+
+
+
             <Grid container spacing={10} justify="center">
               {loadingData ? <Loader loading={loadingData} /> : <PhrasesGridContainer
                 phrasesData={searchData}
@@ -455,16 +461,16 @@ function App() {
             />}
 
             {addModal && <AddPhraseModal
-                open={addModal}
-                pronunciation={pronunciation}
-                russian={russian}
-                soundFileURL={soundFileURL}
-                sortOrder={sortOrder}
-                add={AddPhrase}
-                cbHandler={toggleCheckboxes}
-                checkBoxObject={checkedObject}
-                phraseChangeHandler={customHandlerChange}
-                toggleAddModal={toggleAddModal}
+              open={addModal}
+              pronunciation={pronunciation}
+              russian={russian}
+              soundFileURL={soundFileURL}
+              sortOrder={sortOrder}
+              add={AddPhrase}
+              cbHandler={toggleCheckboxes}
+              checkBoxObject={checkedObject}
+              phraseChangeHandler={customHandlerChange}
+              toggleAddModal={toggleAddModal}
             />}
 
           </AppContext.Provider>

@@ -1,9 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import PhrasesLeftGrid from './PhrasesLeftGrid';
-import PhrasesRightGrid from './PhrasesRightGrid';
 import { Paper, Typography } from '@material-ui/core';
 import { FaPen, FaTimesCircle } from 'react-icons/fa';
+import SearchPhrases from './SearchPhrases';
 
 function PhrasesGridContainer({ phrasesData, toggleModal, changeHandler, addPhrase, searchHandler, checkBoxHandler, checkBoxValues }) {
     const myData = phrasesData.filter(v => v.Pronunciation !== null).map((value, index) => {
@@ -13,7 +12,8 @@ function PhrasesGridContainer({ phrasesData, toggleModal, changeHandler, addPhra
             isLanguage: value.isLanguagePhrase.data[0]
         }
         return (
-            <Grid item xs={4} md={4}>
+            <Grid item xs={4} md={4} lg={4} >
+
                 <Paper style={styles.paperContainer} key={value.BasicPhrasesID}>
                     <Typography variant="subtitle1" style={{ textAlign: 'center' }} >
                         {value.Pronunciation} - {value.BasicPhrasesDescription}
@@ -28,7 +28,7 @@ function PhrasesGridContainer({ phrasesData, toggleModal, changeHandler, addPhra
                         />
                     </div>
                     <div style={{ textAlign: 'center' }}>
-                        <span style={{ fontSize: 10 }}>{value.sortOrder}</span>
+                        <span style={{ fontSize: 10 }}>{value.SortOrder}</span>
                     </div>
                     <div style={{ textAlign: 'center' }}>
                         Phrase type:{phraseType.isGreeting === 1 ? <span>Greeting</span> : ''} {phraseType.isGeneral === 1 ? <span>General</span> : ''} {phraseType.isLanguage === 1 ? <span>Language</span> : ''}
@@ -42,13 +42,13 @@ function PhrasesGridContainer({ phrasesData, toggleModal, changeHandler, addPhra
     });
 
     return (
-        <div>
-            <Grid container key={phrasesData.BasicPhrasesID} direction="row" justify="center" >
 
-                {myData}
+        <Grid container key={phrasesData.BasicPhrasesID} direction="row" justify="center" >
 
-            </Grid>
-        </div>
+            {myData}
+
+        </Grid>
+
     )
 
 
