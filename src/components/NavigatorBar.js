@@ -12,10 +12,10 @@ const NavigationBar = ({ icon, addIcon, toggleTheme, toggleModal }) => {
 
                 <Typography variant="h6" style={{ textAlign: 'center' }}>
                     Russian Admin
-                    <NavigatorButton
+                    {/* <NavigatorButton
                         icon={icon}
                         changeTheme={toggleTheme}
-                    />
+                    /> */}
                     <NavigatorButton
                         icon={addIcon}
                         clickMethod={toggleModal}

@@ -315,22 +315,20 @@ function App() {
   //TOGGLE MODAL
 
   const toggleModal = (item) => {
-    console.log('toggleModal')
-    console.log(item);
+
     setUpdateModal(!updateModal);
     setUpdatePronun(item.Pronunciation);
     setUpdateRuss(item.BasicPhrasesDescription);
     setUpdateSoundURL(item.SoundFileName);
     setUpdateSortOrder(item.SortOrder);
     setPhraseID(item.BasicPhrasesID);
-
   }
 
   const deleteItem = (item) => {
 
     const {BasicPhrasesID} = item;
 
-    const headerInfo = {
+    const headerInfo = { 
       'Content-Type': 'application/json'
     };
 
