@@ -5,8 +5,9 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppContext } from '../../App';
 import '../../styles/UpdatePhraseModal.css';
+import UpdateTextInput from '../UpdateTextInput/UpdateTextInput';
 
-function UpdatePhraseModal({ open, pronunciation, russian, soundFileURL,sortOrder, toggleModal, changeHandler }) {
+function UpdatePhraseModal({ open, pronunciation, russian, soundFileURL, sortOrder, toggleModal, changeHandler }) {
 
     const { updateItem } = useContext(AppContext);
 
@@ -67,18 +68,40 @@ function UpdatePhraseModal({ open, pronunciation, russian, soundFileURL,sortOrde
                 onBackdropClick={toggleModal}
             >
                 <div className={classes.paper}>
-                    <div className="inputContainer">
-                        <TextField style={{ width: '100%' }} placeholder='Pronunciation...' name='updatepronunciation' autoFocus value={pronunciation} onChange={updateChangeHandler} />
-                    </div>
-                    <div style={{ textAlign: 'center', marginBottom: 20 }} >
-                        <TextField style={{ width: '100%' }} placeholder='Russian...' name='updaterussian' value={russian} onChange={updateChangeHandler} />
-                    </div>
-                    <div style={{ marginBottom: 20 }}>
-                        <TextField style={{ width: '100%' }} placeholder='Sound file URL...' name='updatesoundfile' multiline rows="2" value={soundFileURL} onChange={updateChangeHandler} />
-                    </div>
-                    <div>
-                        <TextField style={{ width: '100%' }} placeholder='Sort order' name='updatesortorder' value={sortOrder} onChange={updateChangeHandler} />
-                    </div>
+
+                    <UpdateTextInput
+                        placeholder='Pronunciation...'
+                        name='updatepronunciation'
+                        value={pronunciation}
+                        isAutoFocus={true}
+                        onChangeHandler={updateChangeHandler}
+                    />
+
+                    <UpdateTextInput
+                        placeholder='Russian...'
+                        name='updaterussian'
+                        value={russian}
+                        onChangeHandler={updateChangeHandler}
+                        isAutoFocus={false}
+                    />
+
+                    <UpdateTextInput
+                        placeholder='Sound file URL...'
+                        name='updatesoundfile'
+                        isMulti={true}
+                        value={soundFileURL}
+                        onChangeHandler={updateChangeHandler}
+                    />
+                    <UpdateTextInput
+                        placeholder='Sort order'
+                        name='updatesortorder'
+                        isMulti={false}
+                        value={sortOrder}
+                        onChangeHandler={updateChangeHandler}
+                    />
+
+
+
                     <div style={styles.btnContainer}>
                         <Button color="primary" variant="outlined" style={styles.btnUpdate} onClick={updateItem} >Update</Button>
                         <Button color="secondary" variant="outlined" onClick={toggleModal} className="close" >Close</Button>
@@ -92,14 +115,14 @@ function UpdatePhraseModal({ open, pronunciation, russian, soundFileURL,sortOrde
 }
 
 const styles = {
-    btnContainer:{
+    btnContainer: {
         paddingTop: '5%',
         flex: 1,
         justifyContent: 'space-between',
         textAlign: 'center'
     },
-    btnUpdate:{
-        marginRight:10
+    btnUpdate: {
+        marginRight: 10
     }
 }
 

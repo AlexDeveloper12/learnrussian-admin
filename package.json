@@ -13,6 +13,7 @@
     "dot-env": "0.0.1",
     "dotenv": "^8.2.0",
     "faker": "^5.4.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-dropdown": "^1.9.2",
