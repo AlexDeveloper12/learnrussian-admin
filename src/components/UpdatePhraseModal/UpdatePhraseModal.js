@@ -3,8 +3,8 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppContext } from '../App';
-import '../styles/UpdatePhraseModal.css';
+import { AppContext } from '../../App';
+import '../../styles/UpdatePhraseModal.css';
 
 function UpdatePhraseModal({ open, pronunciation, russian, soundFileURL,sortOrder, toggleModal, changeHandler }) {
 

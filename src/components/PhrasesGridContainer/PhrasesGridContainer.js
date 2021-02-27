@@ -1,8 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { Paper, Typography } from '@material-ui/core';
-import { FaPen, FaTimesCircle } from 'react-icons/fa';
-import PhrasesData from './PhrasesData';
+import { FaChevronCircleUp } from 'react-icons/fa';
+import PhrasesData from '../PhrasesData/PhrasesData';
 
 function PhrasesGridContainer({ phrasesData, toggleModal, deleteMethod }) {
     const myData = phrasesData.filter(v => v.Pronunciation !== null).map((value, index) => {
@@ -27,6 +26,11 @@ function PhrasesGridContainer({ phrasesData, toggleModal, deleteMethod }) {
         <Grid container key={phrasesData.BasicPhrasesID} direction="row" justify="center" >
 
             {myData}
+
+            <Grid item xs={6} md={6}>
+                Hello
+                <FaChevronCircleUp size={20}/>
+            </Grid>
 
         </Grid>
 

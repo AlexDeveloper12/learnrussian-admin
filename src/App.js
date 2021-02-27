@@ -5,15 +5,15 @@ import Calls from './API/Calls';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import 'fontsource-roboto';
-import NavigationBar from './components/NavigatorBar';
-import PhrasesGridContainer from './components/PhrasesGridContainer';
-import Loader from './components/Loader';
-import UpdatePhraseModal from './components/UpdatePhraseModal';
+import NavigationBar from './components/NavigatorBar/NavigatorBar';
+import PhrasesGridContainer from './components/PhrasesGridContainer/PhrasesGridContainer';
+import Loader from './components/Loader/Loader';
+import UpdatePhraseModal from './components/UpdatePhraseModal/UpdatePhraseModal';
 import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { Brightness3Outlined, Brightness7Outlined, Add } from '@material-ui/icons';
-import AddPhraseModal from './components/AddPhraseModal';
-import SearchPhrases from './components/SearchPhrases';
+import AddPhraseModal from './components/AddPhraseModal/AddPhraseModal';
+import SearchPhrases from './components/SearchPhrases/SearchPhrases';
 
 
 require('dotenv').config()
@@ -256,6 +256,7 @@ function App() {
   const filterByPhraseType = (event) => {
 
     let value = event.target.value;
+    console.log(event.target.checked);
 
     let filterResult = phrases.filter((data) => {
       let filterValueArray = []
@@ -326,9 +327,9 @@ function App() {
 
   const deleteItem = (item) => {
 
-    const {BasicPhrasesID} = item;
+    const { BasicPhrasesID } = item;
 
-    const headerInfo = { 
+    const headerInfo = {
       'Content-Type': 'application/json'
     };
 
@@ -423,7 +424,7 @@ function App() {
 
           <AppContext.Provider
             value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType, selectedFilter: selectedFilter }} >
-            <Grid container justify="center" style={{marginBottom:45}}>
+            <Grid container justify="center" style={{ marginBottom: 45 }}>
               <Grid item>
                 <SearchPhrases
                   changeHandler={searchDataHandler} />

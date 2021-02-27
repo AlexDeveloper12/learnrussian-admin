@@ -1,7 +1,7 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 
-const NavigatorButton = ({ icon, clickMethod }) => {
+const NavigatorButton = ({ icon, clickMethod,title }) => {
 
     return (
         
@@ -10,6 +10,7 @@ const NavigatorButton = ({ icon, clickMethod }) => {
                 color="inherit"
                 aria-label="mode"
                 onClick={clickMethod}
+                title={title}
             >
                 {icon}
             </IconButton>

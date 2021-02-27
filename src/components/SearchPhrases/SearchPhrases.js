@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import 'fontsource-roboto';
-import FilterRadioGroup from '../components/FilterRadioGroup';
-import FilterDropdown from './FilterDropdown';
-import { AppContext } from '../App';
 import Paper from '@material-ui/core/Paper';
+import FilterRadioGroup from '../FilterRadioGroup/FilterRadioGroup';
+import { AppContext } from '../../App';
 
 function SearchPhrases({ searchValue, changeHandler }) {
 
@@ -21,14 +20,6 @@ function SearchPhrases({ searchValue, changeHandler }) {
                     selectedValue={selectedFilter}
                 />
             </Paper>
-
-
-            {/* <FilterDropdown/> */}
-            {/* <div style={{ textAlign: 'left', marginBottom: 20 }}>
-                <span>Number of phrases: {phrasesCount}</span><br />
-            </div> */}
-
-
 
             <TextField placeholder="Search phrases..."
                 value={searchValue}
