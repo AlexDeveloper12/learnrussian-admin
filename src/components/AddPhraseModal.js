@@ -122,7 +122,7 @@ function AddPhraseModal({ open, phraseChangeHandler, pronunciation, russian, sou
                     />
 
                     <div className={classes.btnContainer}>
-                        <Button variant="outlined" color="secondary" onClick={add}  > Add Phrase</Button>
+                        <Button variant="outlined" color="primary" onClick={add}  > Add Phrase</Button>
                         <Button variant="outlined" color="secondary" onClick={toggleAddModal} className={classes.btnClose}>Close</Button>
                     </div>
 

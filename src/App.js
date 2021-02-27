@@ -316,6 +316,8 @@ function App() {
   //TOGGLE MODAL
 
   const toggleModal = (item) => {
+    console.log('toggleModal')
+    console.log(item);
     setUpdateModal(!updateModal);
     setUpdatePronun(item.Pronunciation);
     setUpdateRuss(item.BasicPhrasesDescription);
@@ -443,10 +445,7 @@ function App() {
                 phrasesData={searchData}
                 toggleModal={toggleModal}
                 changeHandler={customHandlerChange}
-                addPhrase={AddPhrase}
-                searchHandler={searchDataHandler}
-                checkBoxHandler={toggleCheckboxes}
-                checkBoxValues={checkedObject}
+                deleteMethod={deleteItem}
               />}
 
             </Grid>

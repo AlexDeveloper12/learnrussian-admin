@@ -4,7 +4,7 @@ import { Paper, Typography } from '@material-ui/core';
 import { FaPen, FaTimesCircle } from 'react-icons/fa';
 import SearchPhrases from './SearchPhrases';
 
-function PhrasesGridContainer({ phrasesData, toggleModal, changeHandler, addPhrase, searchHandler, checkBoxHandler, checkBoxValues }) {
+function PhrasesGridContainer({ phrasesData, toggleModal, changeHandler, searchHandler,deleteMethod }) {
     const myData = phrasesData.filter(v => v.Pronunciation !== null).map((value, index) => {
         const phraseType = {
             isGreeting: value.isGreetingPhrase.data[0],
@@ -20,10 +20,11 @@ function PhrasesGridContainer({ phrasesData, toggleModal, changeHandler, addPhra
                     </Typography>
                     <div style={{ textAlign: 'center' }}>
                         <FaPen
-
+                            onClick={()=>toggleModal(value)}
                             style={{ marginLeft: 10 }}
                         />
                         <FaTimesCircle
+                            onClick={deleteMethod}
                             style={{ marginLeft: 10 }}
                         />
                     </div>
