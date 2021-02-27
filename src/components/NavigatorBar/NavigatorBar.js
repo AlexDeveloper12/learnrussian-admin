@@ -2,8 +2,9 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import NavigatorButton from '../NavigatorButton/NavigatorButton';
+import propTypes from 'prop-types';
 
-const NavigationBar = ({ icon, addIcon, toggleTheme, toggleModal }) => {
+const NavigationBar = ({ addIcon, toggleModal }) => {
 
     return (
         <div>
@@ -20,8 +21,12 @@ const NavigationBar = ({ icon, addIcon, toggleTheme, toggleModal }) => {
                 </Typography>
             </AppBar>
         </div>
-    )
-}
+    );
+};
 
 export default NavigationBar;
 
+NavigationBar.propTypes = {
+  addIcon:propTypes.func,
+  toggleModal:propTypes.func
+};

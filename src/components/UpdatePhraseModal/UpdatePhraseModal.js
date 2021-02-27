@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import Modal from '@material-ui/core/Modal';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppContext } from '../../App';
 import '../../styles/UpdatePhraseModal.css';
 import UpdateTextInput from '../UpdateTextInput/UpdateTextInput';
+import propTypes from 'prop-types';
+
 
 function UpdatePhraseModal({ open, pronunciation, russian, soundFileURL, sortOrder, toggleModal, changeHandler }) {
 
@@ -124,6 +125,16 @@ const styles = {
     btnUpdate: {
         marginRight: 10
     }
+}
+
+UpdatePhraseModal.propTypes = {
+    open: propTypes.bool.isRequired,
+    pronunciation: propTypes.string.isRequired,
+    russian: propTypes.string.isRequired,
+    soundFileURL: propTypes.string.isRequired,
+    sortOrder: propTypes.number.isRequired,
+    toggleModal: propTypes.bool.isRequired,
+    changeHandler: propTypes.func.isRequired
 }
 
 export default UpdatePhraseModal;

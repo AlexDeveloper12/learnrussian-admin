@@ -15,16 +15,15 @@ import { Brightness3Outlined, Brightness7Outlined, Add } from '@material-ui/icon
 import AddPhraseModal from './components/AddPhraseModal/AddPhraseModal';
 import SearchPhrases from './components/SearchPhrases/SearchPhrases';
 
-
-require('dotenv').config()
+require('dotenv').config();
 
 export const AppContext = createContext();
 
 export const light = {
   palette: {
     type: 'light'
-  },
-}
+  }
+};
 
 export const dark = {
   palette: {
@@ -32,9 +31,7 @@ export const dark = {
   }
 };
 
-
-function App() {
-
+function App () {
   const [pronunciation, setPronunciation] = useState('');
   const [russian, setRussian] = useState('');
   const [phrases, setPhrases] = useState([]);
@@ -65,8 +62,7 @@ function App() {
 
   const [addModal, setAddModal] = useState(false);
 
-
-  const icon = !theme ? <Brightness7Outlined /> : <Brightness3Outlined />
+  const icon = !theme ? <Brightness7Outlined /> : <Brightness3Outlined />;
 
   const addIcon = <Add />;
 
@@ -75,11 +71,11 @@ function App() {
   const AddPhrase = () => {
     let errorString = '';
 
-    if (pronunciation.length === 0) { //if pronunciation empty
+    if (pronunciation.length === 0) {
       errorString += 'Please enter a pronunciation value<br/>';
     }
 
-    if (russian.length === 0) { //if russian/english phrase empty
+    if (russian.length === 0) {
       errorString += 'Please enter a Russian value<br/>';
     }
 
@@ -87,18 +83,15 @@ function App() {
       errorString += 'Please enter a sort order value<br/>';
     }
 
-    if (/[a-zA-Z]/.test(sortOrder)) { //if sort order contains a string value
+    if (/[a-zA-Z]/.test(sortOrder)) {
       errorString += 'Please ensure the sort order value is a number only<br/>';
     }
 
-    //if all of the checkboxes are unchecked
-
-    if (checkedObject['general'] === false && checkedObject['greeting'] === false && checkedObject['language'] === false) {
+    if (checkedObject.general === false && checkedObject.greeting === false && checkedObject.language === false) {
       errorString += 'Please ensure you check one of the 3 checkboxes<br/>';
     }
 
     if (errorString === '') {
-
       const myData = JSON.stringify({
         pronunciation: pronunciation,
         description: russian,
@@ -113,7 +106,6 @@ function App() {
         'Content-Type': 'application/json'
       };
 
-
       axios({
         method: 'POST',
         url: Calls.addbasicphrase,
@@ -121,7 +113,6 @@ function App() {
         headers: headerInfo
       })
         .then(responseData => {
-          //if no errors then add phrase
           Swal.fire({
             title: 'Great!',
             text: responseData.data.message,
@@ -140,29 +131,23 @@ function App() {
           setAddModal(false);
 
           GetPhrases();
-
-
         })
         .catch(error => {
-
           console.log('Error posting basic phrase: ' + error);
           Swal.fire({
             title: 'Unsuccessful!',
             text: error.message,
             icon: 'error'
           });
-        })
-
+        });
     } else {
-
       Swal.fire({
         title: 'Unsuccessful!',
         icon: 'error',
         html: errorString
       });
     }
-
-  }
+  };
 
   const GetPhrases = () => {
     axios({
@@ -173,29 +158,24 @@ function App() {
       }
     })
       .then(response => {
-
-
         setPhrases(response.data.message);
         setLoadingData(false);
         setSearchData(response.data.message);
         setNumOfPhrases(response.data.message.length);
         console.log(response.data.message[0].isGeneralPhrase.data[0]);
-
       })
       .catch(error => {
         console.log('GetPhrases error: ' + error);
-      })
-
-  }
+      });
+  };
 
   useEffect(() => {
     GetPhrases();
-  }, [])
+  }, []);
 
   const customHandlerChange = (event) => {
-    let value = event.target.value;
-    console.log(event.target.value);
-    console.log(event.target.name);
+    const value = event.target.value;
+
     switch (event.target.name) {
       case 'pronunciation':
         setPronunciation(value);
@@ -210,7 +190,7 @@ function App() {
         setSoundFileURL(value);
         break;
       case 'updatepronunciation':
-        setUpdatePronun(value)
+        setUpdatePronun(value);
         break;
       case 'updaterussian':
         setUpdateRuss(value);
@@ -224,65 +204,46 @@ function App() {
       default:
         break;
     }
-  }
+  };
 
   const searchDataHandler = (event) => {
-    //setting the entered data to lower case
-    let value = event.target.value;
+    const value = event.target.value;
 
-    let result = []; //creating empty result array
-    //setting resul equal to a filter of the phrases data 
-    //and returning data that has data.BasicPhrasesDescription
-    // value equal to the value entered into input box
-    //we then set search data equal to this
+    let result = [];
 
     result = phrases.filter((data) => {
-
-      return data.BasicPhrasesDescription.toLowerCase().search(value) != -1;
-
-
+      return data.BasicPhrasesDescription.toLowerCase().search(value) !== -1;
     });
 
     setSearchData(result);
     setGeneral(false);
     setGreeting(false);
     setLanguage(false);
-    //when a user begins to search for a phrase we need to uncheck the radio buttons above
-
-  }
-
-  //RADIO BUTTON FILTERS
+  };
 
   const filterByPhraseType = (event) => {
+    const value = event.target.value;
 
-    let value = event.target.value;
-    console.log(event.target.checked);
-
-    let filterResult = phrases.filter((data) => {
-      let filterValueArray = []
+    const filterResult = phrases.filter((data) => {
+      let filterValueArray = [];
       switch (value) {
         case 'greeting':
-          filterValueArray = data.isGreetingPhrase.data[0] === 1
+          filterValueArray = data.isGreetingPhrase.data[0] === 1;
           break;
         case 'general':
-          filterValueArray = data.isGeneralPhrase.data[0] === 1
+          filterValueArray = data.isGeneralPhrase.data[0] === 1;
           break;
         case 'language':
-          filterValueArray = data.isLanguagePhrase.data[0] === 1
+          filterValueArray = data.isLanguagePhrase.data[0] === 1;
           break;
       }
 
-      return filterValueArray
+      return filterValueArray;
     });
-
-    console.log(filterResult);
 
     setSelectedFilter(event.target.value);
     setSearchData(filterResult);
-
-  }
-
-  //TOGGLE CHECKBOXES
+  };
 
   const toggleCheckboxes = (event) => {
     let greeting = false;
@@ -310,23 +271,18 @@ function App() {
       general: general,
       language: language
     }));
-
-  }
-
-  //TOGGLE MODAL
+  };
 
   const toggleModal = (item) => {
-
     setUpdateModal(!updateModal);
     setUpdatePronun(item.Pronunciation);
     setUpdateRuss(item.BasicPhrasesDescription);
     setUpdateSoundURL(item.SoundFileName);
     setUpdateSortOrder(item.SortOrder);
     setPhraseID(item.BasicPhrasesID);
-  }
+  };
 
   const deleteItem = (item) => {
-
     const { BasicPhrasesID } = item;
 
     const headerInfo = {
@@ -339,28 +295,25 @@ function App() {
       headers: headerInfo
     })
       .then(response => {
-        //reload 
         if (response.status === 200) {
           Swal.fire({
             title: 'Deleted',
             text: response.data.message,
-            icon: "success"
+            icon: 'success'
           });
-          GetPhrases(); //show sweet alert and then reload phrases
-          //can maybe do a fade in fade out animation?
+          GetPhrases();
         } else {
           Swal.fire({
             title: 'Error',
             text: 'Error deleting the phrase!',
-            icon: "error"
-          })
+            icon: 'error'
+          });
         }
-
       })
       .catch(error => {
         console.log('deleteItem error: ' + error);
-      })
-  }
+      });
+  };
 
   const updateItem = (item) => {
     const myData = JSON.stringify({
@@ -369,8 +322,6 @@ function App() {
       soundFileURL: updateSoundURL,
       sortOrder: updateSortOrder
     });
-
-    //send as json data
 
     const headerInfo = {
       'Content-Type': 'application/json'
@@ -383,9 +334,7 @@ function App() {
       headers: headerInfo
     })
       .then(response => {
-
         if (response.status === 200) {
-
           setUpdateModal(!updateModal);
           Swal.fire({
             title: 'Update!',
@@ -393,23 +342,21 @@ function App() {
             icon: 'success'
           });
 
-          GetPhrases(); //retrieve phrases after we have updated them to see changes
+          GetPhrases();
         }
-
       })
       .catch(error => {
-        console.log('updateItem: ' + error)
-      })
-
-  }
+        console.log('updateItem: ' + error);
+      });
+  };
 
   const toggleTheme = () => {
-    setTheme(!theme)
-  }
+    setTheme(!theme);
+  };
 
   const toggleAddModal = () => {
     setAddModal(!addModal);
-  }
+  };
 
   return (
     <ThemeProvider theme={appliedTheme}>
@@ -420,7 +367,7 @@ function App() {
             toggleTheme={toggleTheme}
             toggleModal={toggleAddModal}
             addIcon={addIcon}
-          />
+          />;
 
           <AppContext.Provider
             value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType, selectedFilter: selectedFilter }} >
@@ -431,15 +378,15 @@ function App() {
               </Grid>
             </Grid>
 
-
-
             <Grid container spacing={10} justify="center">
-              {loadingData ? <Loader loading={loadingData} /> : <PhrasesGridContainer
-                phrasesData={searchData}
-                toggleModal={toggleModal}
-                changeHandler={customHandlerChange}
-                deleteMethod={deleteItem}
-              />}
+              {loadingData
+                ? <Loader loading={loadingData} />
+                : <PhrasesGridContainer
+                  phrasesData={searchData}
+                  toggleModal={toggleModal}
+                  changeHandler={customHandlerChange}
+                  deleteMethod={deleteItem}
+                />}
 
             </Grid>
             {updateModal && <UpdatePhraseModal
@@ -473,13 +420,12 @@ function App() {
   );
 }
 
-
 const styles = {
   container: {
     marginTop: '5%',
     padding: '3%',
     marginLeft: '2%'
   }
-}
+};
 
 export default App;

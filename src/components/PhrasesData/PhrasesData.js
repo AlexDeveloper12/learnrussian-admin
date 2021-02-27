@@ -1,42 +1,42 @@
 import React from 'react';
-import {Paper,Grid,Typography} from '@material-ui/core'
-import {FaTimesCircle,FaPen} from 'react-icons/fa';
+import { Paper, Grid, Typography } from '@material-ui/core'
+import { FaTimesCircle, FaPen } from 'react-icons/fa';
+import propTypes from 'prop-types';
 
-function PhrasesData({phraseType,toggleModal,deleteMethod,phraseObject}){
+function PhrasesData({ phraseType, toggleModal, deleteMethod, phraseObject }) {
 
-    const {BasicPhrasesID,BasicPhrasesDescription,SortOrder,Pronunciation} = phraseObject;
+    const { BasicPhrasesID, BasicPhrasesDescription, SortOrder, Pronunciation } = phraseObject;
 
-    return(
+    return (
         <Grid item xs={4} md={4} lg={4} >
 
-        <Paper style={styles.paperContainer} key={BasicPhrasesID}>
-            <Typography variant="subtitle1" style={{ textAlign: 'center' }} >
-                {Pronunciation} - {BasicPhrasesDescription}
-            </Typography>
-            <div style={{ textAlign: 'center' }}>
-                <FaPen
-                    onClick={()=>toggleModal(phraseObject)}
-                    style={{ marginLeft: 10 }}
-                />
-                <FaTimesCircle
-                    onClick={()=>deleteMethod(phraseObject)}
-                    style={{ marginLeft: 10 }}
-                />
-            </div>
-            <div style={{ textAlign: 'center' }}>
-                <span style={{ fontSize: 10 }}>{SortOrder}</span>
-            </div>
+            <Paper style={styles.paperContainer} key={BasicPhrasesID}>
+                <Typography variant="subtitle1" style={{ textAlign: 'center' }} >
+                    {Pronunciation} - {BasicPhrasesDescription}
+                </Typography>
+                <div style={{ textAlign: 'center' }}>
+                    <FaPen
+                        onClick={() => toggleModal(phraseObject)}
+                        style={{ marginLeft: 10 }}
+                    />
+                    <FaTimesCircle
+                        onClick={() => deleteMethod(phraseObject)}
+                        style={{ marginLeft: 10 }}
+                    />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                    <span style={{ fontSize: 10 }}>{SortOrder}</span>
+                </div>
 
-            <div style={{ textAlign: 'center' }}>
-                Phrase type:{phraseType.isGreeting === 1 ? <span>Greeting</span> : ''} {phraseType.isGeneral === 1 ? <span>General</span> : ''} {phraseType.isLanguage === 1 ? <span>Language</span> : ''}
-            </div>
+                <div style={{ textAlign: 'center' }}>
+                    Phrase type:{phraseType.isGreeting === 1 ? <span>Greeting</span> : ''} {phraseType.isGeneral === 1 ? <span>General</span> : ''} {phraseType.isLanguage === 1 ? <span>Language</span> : ''}
+                </div>
 
-        </Paper>
+            </Paper>
 
-    </Grid>
+        </Grid>
     )
 }
-
 
 const styles = {
     paperContainer: {
@@ -46,6 +46,13 @@ const styles = {
         overflow: 'auto',
         width: '80%'
     }
+};
+
+PhrasesData.propTypes = {
+    phraseType: propTypes.object,
+    toggleModal: propTypes.func,
+    deleteMethod: propTypes.func,
+    phraseObject: propTypes.object
 }
 
 export default PhrasesData;
