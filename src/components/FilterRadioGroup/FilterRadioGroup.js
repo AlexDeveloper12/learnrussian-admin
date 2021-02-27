@@ -2,18 +2,14 @@ import React from 'react';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FilterRadioButton from '../FilterRadioButton/FilterRadioButton';
 
-
 const FilterRadioGroup = () => {
-
-    return (
+  return (
         <div style={styles.container}>
             <RadioGroup row >
-
                 <FilterRadioButton
                     label='General'
                     compValue='general'
                     defaultValue='general'
-
                 />
                 <FilterRadioButton
                     label='Greeting'
@@ -29,20 +25,16 @@ const FilterRadioGroup = () => {
 
                 />
 
-
             </RadioGroup>
 
         </div>
-    )
-
-
-}
+  );
+};
 
 const styles = {
-    container: {
-        marginBottom: 20
-    }
-
-}
+  container: {
+    marginBottom: 20
+  }
+};
 
 export default FilterRadioGroup;

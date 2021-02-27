@@ -5,9 +5,8 @@ import NavigatorButton from '../NavigatorButton/NavigatorButton';
 import propTypes from 'prop-types';
 
 const NavigationBar = ({ addIcon, toggleModal }) => {
-
-    return (
-        <div>
+  return (
+  <div>
             <AppBar style={{ padding: 10 }} >
 
                 <Typography variant="h6" style={{ textAlign: 'center' }}>
@@ -21,12 +20,12 @@ const NavigationBar = ({ addIcon, toggleModal }) => {
                 </Typography>
             </AppBar>
         </div>
-    );
+  );
 };
 
 export default NavigationBar;
 
 NavigationBar.propTypes = {
-  addIcon:propTypes.func,
-  toggleModal:propTypes.func
+  addIcon: propTypes.func,
+  toggleModal: propTypes.func
 };
