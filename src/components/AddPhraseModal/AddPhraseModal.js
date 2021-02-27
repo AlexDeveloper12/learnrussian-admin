@@ -4,50 +4,49 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import CheckBox from '@material-ui/core/CheckBox';
+import propTypes from 'prop-types';
 
-function AddPhraseModal({ open, phraseChangeHandler, pronunciation, russian, soundFileURL, sortOrder, checkBoxObject,add,cbHandler,toggleAddModal  }) {
+function AddPhraseModal ({ open, phraseChangeHandler, pronunciation, russian, soundFileURL, sortOrder, checkBoxObject, add, cbHandler, toggleAddModal }) {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      height: '60%',
+      flexGrow: 1,
+      minWidth: '60%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: 1
+    },
+    modal: {
+      display: 'flex',
+      padding: theme.spacing(1),
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    paper: {
+      width: 550,
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+      height: '70%',
+      marginLeft: '30%',
+      marginTop: '5%'
+    },
+    center: {
+      textAlign: 'center'
+    },
+    btnContainer: {
+      paddingTop: '5%',
+      flex: 1,
+      justifyContent: 'space-between',
+      textAlign: 'center'
+    },
+    btnClose: {
+      marginLeft: 20
+    }
+  }));
 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            height: '60%',
-            flexGrow: 1,
-            minWidth: '60%',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-            
-        },
-        modal: {
-            display: 'flex',
-            padding: theme.spacing(1),
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        paper: {
-            width: 550,
-            backgroundColor: theme.palette.background.paper,
-            boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3),
-            height: '70%',
-            marginLeft:'30%',
-            marginTop:'5%'
-        },
-        center: {
-            textAlign: 'center'
-        },
-        btnContainer: {
-            paddingTop: '5%',
-            flex: 1,
-            justifyContent: 'space-between',
-            textAlign: 'center'
-        },
-        btnClose:{
-            marginLeft:20
-        }
-    }));
-
-    const classes = useStyles();
-    return (
+  const classes = useStyles();
+  return (
         <div className={classes.root}>
             <Modal open={open} onBackdropClick={open}>
                 <div className={classes.paper}>
@@ -72,7 +71,6 @@ function AddPhraseModal({ open, phraseChangeHandler, pronunciation, russian, sou
                         placeholder="привет - hello (in this format)"
                     />
 
-
                     <TextField
                         style={styles}
                         onChange={phraseChangeHandler}
@@ -84,7 +82,6 @@ function AddPhraseModal({ open, phraseChangeHandler, pronunciation, russian, sou
 
                     />
 
-
                     <TextField
                         style={styles}
                         onChange={phraseChangeHandler}
@@ -92,7 +89,6 @@ function AddPhraseModal({ open, phraseChangeHandler, pronunciation, russian, sou
                         placeholder="Sort Order..."
                         name="sortorder"
                         value={sortOrder}
-
                     />
 
                     <FormControlLabel
@@ -100,16 +96,15 @@ function AddPhraseModal({ open, phraseChangeHandler, pronunciation, russian, sou
                         label="Greeting Phrase?"
                         onClick={(event) => cbHandler(event)}
                         name="greetingphrase"
-                        checked={checkBoxObject["greeting"]}
+                        checked={checkBoxObject.greeting}
                     />
-
 
                     <FormControlLabel
                         control={<CheckBox />}
                         label="General Phrase?"
                         onClick={(event) => cbHandler(event)}
                         name="generalphrase"
-                        checked={checkBoxObject["general"]}
+                        checked={checkBoxObject.general}
                     />
 
                     <FormControlLabel
@@ -117,34 +112,43 @@ function AddPhraseModal({ open, phraseChangeHandler, pronunciation, russian, sou
                         label="Language Phrase?"
                         onClick={(event) => cbHandler(event)}
                         name="languagephrase"
-                        checked={checkBoxObject["language"]}
-
+                        checked={checkBoxObject.language}
                     />
 
                     <div className={classes.btnContainer}>
-                        <Button variant="outlined" color="primary" onClick={add}  > Add Phrase</Button>
+                        <Button variant="outlined" color="primary" onClick={add}> Add Phrase</Button>
                         <Button variant="outlined" color="secondary" onClick={toggleAddModal} className={classes.btnClose}>Close</Button>
                     </div>
 
                 </div>
 
-
             </Modal>
 
         </div>
-    )
+  );
 }
-
 
 const styles = {
-    width: '100%',
-    marginBottom: 30,
-    container: {
-        height: '30%',
-        width: '100%'
-    },
-    color: 'white',
+  width: '100%',
+  marginBottom: 30,
+  container: {
+    height: '30%',
+    width: '100%'
+  },
+  color: 'white'
+};
 
-}
+AddPhraseModal.propTypes = {
+  open: propTypes.bool,
+  phraseChangeHandler: propTypes.func,
+  pronunciation: propTypes.string,
+  russian: propTypes.string,
+  soundFileURL: propTypes.string,
+  sortOrder: propTypes.number,
+  checkBoxObject: propTypes.object,
+  add: propTypes.func,
+  cbHandler: propTypes.func,
+  toggleAddModal: propTypes.func
+};
 
 export default AddPhraseModal;
