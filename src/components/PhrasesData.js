@@ -1,49 +1,42 @@
-import React, { useContext } from 'react';
-import Typography from '@material-ui/core/Typography';
-import { FaPen, FaTimesCircle } from 'react-icons/fa';
-import { Paper, Grid } from '@material-ui/core';
-import { AppContext } from '../App';
+import React from 'react';
+import {Paper,Grid,Typography} from '@material-ui/core'
+import {FaTimesCircle,FaPen} from 'react-icons/fa';
 
-const PhrasesData = ({ pronunciation, description, ID, toggleModal, value, sortOrder, phraseType }) => {
+function PhrasesData({phraseType,toggleModal,deleteMethod,phraseObject}){
 
-    const { deleteItem } = useContext(AppContext);
+    const {BasicPhrasesID,BasicPhrasesDescription,SortOrder,Pronunciation} = phraseObject;
 
-    const togglePhraseModal = (item) => {
-        toggleModal(item);
-    }
+    return(
+        <Grid item xs={4} md={4} lg={4} >
 
-    const deletePhrase = (ID) => {
-        deleteItem(ID);
-    }
+        <Paper style={styles.paperContainer} key={BasicPhrasesID}>
+            <Typography variant="subtitle1" style={{ textAlign: 'center' }} >
+                {Pronunciation} - {BasicPhrasesDescription}
+            </Typography>
+            <div style={{ textAlign: 'center' }}>
+                <FaPen
+                    onClick={()=>toggleModal(phraseObject)}
+                    style={{ marginLeft: 10 }}
+                />
+                <FaTimesCircle
+                    onClick={()=>deleteMethod(phraseObject)}
+                    style={{ marginLeft: 10 }}
+                />
+            </div>
+            <div style={{ textAlign: 'center' }}>
+                <span style={{ fontSize: 10 }}>{SortOrder}</span>
+            </div>
 
-    return (
-        
-            <Paper style={styles.paperContainer} key={ID} >
-                <Typography variant="subtitle1" style={{ textAlign: 'center' }} >
-                    {pronunciation} - {description}
-                </Typography>
-                <div style={{ textAlign: 'center' }}>
-                    <FaPen
-                        onClick={() => togglePhraseModal(value)}
-                        style={{ marginLeft: 10 }}
-                    />
-                    <FaTimesCircle
-                        style={{ marginLeft: 10 }}
-                        onClick={() => deletePhrase(ID)}
+            <div style={{ textAlign: 'center' }}>
+                Phrase type:{phraseType.isGreeting === 1 ? <span>Greeting</span> : ''} {phraseType.isGeneral === 1 ? <span>General</span> : ''} {phraseType.isLanguage === 1 ? <span>Language</span> : ''}
+            </div>
 
-                    />
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                    <span style={{ fontSize: 10 }}>{sortOrder}</span>
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                    Phrase type:{phraseType.isGreeting === 1 ? <span>Greeting</span> : ''} {phraseType.isGeneral === 1 ? <span>General</span> : ''} {phraseType.isLanguage === 1 ? <span>Language</span> : ''}
-                </div>
-            </Paper>
-        
+        </Paper>
 
+    </Grid>
     )
 }
+
 
 const styles = {
     paperContainer: {

@@ -9,7 +9,6 @@ import NavigationBar from './components/NavigatorBar';
 import PhrasesGridContainer from './components/PhrasesGridContainer';
 import Loader from './components/Loader';
 import UpdatePhraseModal from './components/UpdatePhraseModal';
-
 import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { Brightness3Outlined, Brightness7Outlined, Add } from '@material-ui/icons';
@@ -327,19 +326,17 @@ function App() {
 
   }
 
-  const deleteItem = (itemID) => {
+  const deleteItem = (item) => {
+
+    const {BasicPhrasesID} = item;
 
     const headerInfo = {
       'Content-Type': 'application/json'
     };
 
-    console.log('deleteItem');
-
-    console.log(itemID);
-
     axios({
       method: 'DELETE',
-      url: `${Calls.basicphrase}/${itemID}`,
+      url: `${Calls.basicphrase}/${BasicPhrasesID}`,
       headers: headerInfo
     })
       .then(response => {
@@ -426,11 +423,8 @@ function App() {
             addIcon={addIcon}
           />
 
-
           <AppContext.Provider
             value={{ deleteItem: deleteItem, phrasesCount: numOfPhrases, updateItem: updateItem, filterByPhraseType: filterByPhraseType, selectedFilter: selectedFilter }} >
-            {/* style={{justifyContent:'center',height:'100%',display:'flex',width:'100%',marginBottom:'5%'}} */}
-
             <Grid container justify="center" style={{marginBottom:45}}>
               <Grid item>
                 <SearchPhrases
