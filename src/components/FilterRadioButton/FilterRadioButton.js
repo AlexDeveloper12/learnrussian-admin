@@ -5,13 +5,13 @@ import { AppContext } from '../../App';
 import propTypes from 'prop-types';
 
 const FilterRadioButton = ({ label, compValue, defaultValue }) => {
-  const { filterByPhraseType, selectedFilter } = useContext(AppContext);
+  const { filterByPhraseType } = useContext(AppContext);
 
   return (
 
   <FormControlLabel
             label={label}
-            control={<Radio color="primary" checked={selectedFilter === compValue ? true : false} onClick={filterByPhraseType} value={defaultValue} />}
+            control={<Radio color="primary" onClick={filterByPhraseType} value={defaultValue} />}
             value={defaultValue} />
   );
 };
