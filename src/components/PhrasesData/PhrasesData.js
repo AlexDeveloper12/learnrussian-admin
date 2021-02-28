@@ -1,13 +1,11 @@
 import React from 'react';
-import { Paper, Grid, Typography } from '@material-ui/core'
+import { Paper, Grid, Typography } from '@material-ui/core';
 import { FaTimesCircle, FaPen } from 'react-icons/fa';
 import propTypes from 'prop-types';
 
-function PhrasesData({ phraseType, toggleModal, deleteMethod, phraseObject }) {
-
-    const { BasicPhrasesID, BasicPhrasesDescription, SortOrder, Pronunciation } = phraseObject;
-
-    return (
+function PhrasesData ({ phraseType, toggleModal, deleteMethod, phraseObject }) {
+  const { BasicPhrasesID, BasicPhrasesDescription, SortOrder, Pronunciation } = phraseObject;
+  return (
         <Grid item xs={4} md={4} lg={4} >
 
             <Paper style={styles.paperContainer} key={BasicPhrasesID}>
@@ -35,24 +33,24 @@ function PhrasesData({ phraseType, toggleModal, deleteMethod, phraseObject }) {
             </Paper>
 
         </Grid>
-    )
+  );
 }
 
 const styles = {
-    paperContainer: {
-        marginBottom: 10,
-        padding: 10,
-        maxHeight: '100%',
-        overflow: 'auto',
-        width: '80%'
-    }
+  paperContainer: {
+    marginBottom: 10,
+    padding: 10,
+    maxHeight: '100%',
+    overflow: 'auto',
+    width: '80%'
+  }
 };
 
 PhrasesData.propTypes = {
-    phraseType: propTypes.object,
-    toggleModal: propTypes.func,
-    deleteMethod: propTypes.func,
-    phraseObject: propTypes.object
-}
+  phraseType: propTypes.object,
+  toggleModal: propTypes.func,
+  deleteMethod: propTypes.func,
+  phraseObject: propTypes.object
+};
 
 export default PhrasesData;

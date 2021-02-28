@@ -2,18 +2,18 @@ import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import 'fontsource-roboto';
 import Paper from '@material-ui/core/Paper';
+import propTypes from 'prop-types';
 import FilterRadioGroup from '../FilterRadioGroup/FilterRadioGroup';
 import { AppContext } from '../../App';
 
-function SearchPhrases({ searchValue, changeHandler }) {
+function SearchPhrases ({ searchValue, changeHandler }) {
+  const { selectedFilter } = useContext(AppContext);
 
-    const { phrasesCount, selectedFilter } = useContext(AppContext);
+  const phraseChangeHandler = (e) => {
+    changeHandler(e);
+  };
 
-    const phraseChangeHandler = (e) => {
-        changeHandler(e);
-    }
-
-    return (
+  return (
         <div style={styles.container}>
             <Paper>
                 <FilterRadioGroup
@@ -29,15 +29,18 @@ function SearchPhrases({ searchValue, changeHandler }) {
 
             />
         </div>
-
-    )
-
+  );
 }
 
 const styles = {
-    container:{
-        marginBottom: 10, float: 'left'
-    }
-}
+  container: {
+    marginBottom: 10, float: 'left'
+  }
+};
+
+SearchPhrases.propTypes = {
+  searchValue: propTypes.string,
+  changeHandler: propTypes.func
+};
 
 export default SearchPhrases;
