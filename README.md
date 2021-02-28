@@ -6,4 +6,3 @@ The user experience of doing this is much easier than entering values manually i
 
 The project uses various packages such as React-Modal, Material-UI and and SweetAlert2
 
-![Russian Admin in action.](russianadmin.gif)
