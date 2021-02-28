@@ -8,21 +8,16 @@ const FilterRadioGroup = () => {
             <RadioGroup row >
                 <FilterRadioButton
                     label='General'
-                    compValue='general'
                     defaultValue='general'
                 />
                 <FilterRadioButton
                     label='Greeting'
-                    compValue='greeting'
                     defaultValue='greeting'
-
                 />
 
                 <FilterRadioButton
                     label='Language'
-                    compValue='language'
                     defaultValue='language'
-
                 />
 
             </RadioGroup>

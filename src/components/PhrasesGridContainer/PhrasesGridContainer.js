@@ -4,7 +4,7 @@ import { FaChevronCircleUp } from 'react-icons/fa';
 import PhrasesData from '../PhrasesData/PhrasesData';
 import propTypes from 'prop-types';
 
-function PhrasesGridContainer ({ phrasesData, toggleModal, deleteMethod }) {
+function PhrasesGridContainer ({ phrasesData, toggleModal, deleteMethod, scrollTo }) {
   const myData = phrasesData.filter(v => v.Pronunciation !== null).map((value, index) => {
     const phraseType = {
       isGreeting: value.isGreetingPhrase.data[0],
@@ -25,11 +25,7 @@ function PhrasesGridContainer ({ phrasesData, toggleModal, deleteMethod }) {
   return (
         <Grid container key={phrasesData.BasicPhrasesID} direction="row" justify="center" >
             {myData}
-
-            <Grid item xs={6} md={6}>
-                Hello
-                <FaChevronCircleUp size={20}/>
-            </Grid>
+                <FaChevronCircleUp size={20} onClick={scrollTo}/>
         </Grid>
   );
 }
@@ -37,7 +33,8 @@ function PhrasesGridContainer ({ phrasesData, toggleModal, deleteMethod }) {
 PhrasesGridContainer.propTypes = {
   phrasesData: propTypes.array,
   toggleModal: propTypes.func,
-  deleteMethod: propTypes.func
+  deleteMethod: propTypes.func,
+  scrollTo: propTypes.func
 };
 
 export default PhrasesGridContainer;

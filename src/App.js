@@ -358,6 +358,10 @@ function App () {
     setAddModal(!addModal);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ behavior: 'smooth', top: 0 });
+  };
+
   return (
     <ThemeProvider theme={appliedTheme}>
       <div className="App">
@@ -386,6 +390,7 @@ function App () {
                   toggleModal={toggleModal}
                   changeHandler={customHandlerChange}
                   deleteMethod={deleteItem}
+                  scrollTo={scrollToTop}
                 />}
 
             </Grid>

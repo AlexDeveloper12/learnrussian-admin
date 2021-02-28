@@ -4,7 +4,7 @@ import Radio from '@material-ui/core/Radio';
 import { AppContext } from '../../App';
 import propTypes from 'prop-types';
 
-const FilterRadioButton = ({ label, compValue, defaultValue }) => {
+const FilterRadioButton = ({ label, defaultValue }) => {
   const { filterByPhraseType } = useContext(AppContext);
 
   return (
