@@ -5,3 +5,5 @@ The purpose of this application is to make it easier for myself to add/edit/dele
 The user experience of doing this is much easier than entering values manually into a database table
 
 The project uses various packages such as React-Modal, Material-UI and and SweetAlert2
+
+![Russian Admin in action.](russianadmin.gif)
